@@ -71,7 +71,7 @@ class Tournaments extends Component {
             )
             tournamentTable =  <table className={classes.TournamentTable}>
                 <thead>
-                    <tr key="tournaments_headers">
+                    <tr>
                         <th>{TOURNAMENTS_HEADERS.id}</th>
                         <th>{TOURNAMENTS_HEADERS.name}</th>
                         <th>{TOURNAMENTS_HEADERS.country}</th>
