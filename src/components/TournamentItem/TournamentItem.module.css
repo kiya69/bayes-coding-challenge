@@ -1,0 +1,7 @@
+.TournamentItem {
+    cursor: pointer;
+}
+.TournamentItem:hover,
+.TournamentItem:active {
+    background-color: pink;
+}
