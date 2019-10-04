@@ -3,6 +3,7 @@ import axios from 'axios';
 import TournamentItem from '../../components/TournamentItem/TournamentItem';
 import classes from './Tournaments.module.css';
 import Modal from '../../components/UI/Modal/Modal';
+import TournamentDetails from '../../components/TournamentDetails/TournamentDetails';
 
 const TOURNAMENTS_HEADERS = {
     id: 'ID',
@@ -23,15 +24,18 @@ class Tournaments extends Component {
 
     state = {
         tournaments: [],
+        initialTournaments: [],
         error: false,
-        showTournamentDetail: false,
-        currentTournamentId: null
+        showTournamentDetails: false,
+        currentTournamentId: null,
+        currentTournament: null
     }
 
     componentDidMount() {
         axios.get('https://gist.githubusercontent.com/idrinkritalin/fce0f5b884ffd813850ffb6919fe6bf7/raw/51007b611a52c427e34dbe9d40e91490e17c5248/tournaments.json')
             .then(response => {
                 this.setState({
+                    initialTournaments: [...response.data],
                     tournaments: [...response.data]
                 })
             })
@@ -41,21 +45,51 @@ class Tournaments extends Component {
             });
     }
 
+    // componentWillMount() {
+    //     this.setState({tournaments: this.state.initialTournaments})
+    //   }
+
     tournamentClickHandler = (id) => {
-        console.log(id);
+        console.log(id, typeof id);
         //TODO: maybe use currentTournamentId only?
+        // this.tournamentSummary = this.state.tournaments.find(tournament => tournament.id === id);
+        
+        const currentTournament = this.state.tournaments.find(tournament => tournament.id === id);
+        // console.log('currentTournament',currentTournament)
+        // this.tournamentSummary = <div>
+        //     {JSON.stringify(currentTournament)}
+        //     </div>
         this.setState({
-            showTournamentDetail: true,
-            currentTournamentId: id
+            showTournamentDetails: true,
+            currentTournamentId: id,
+            currentTournament: currentTournament
         })
     }
-
+ 
     hideModalHandler =() => {
 
         this.setState({
-            showTournamentDetail: false,
+            showTournamentDetails: false,
             currentTournamentId: null
         })
+    }
+
+    searchSeriesHandler = (event) => {
+        console.log(event.target.value);
+        if(event.target.value){
+            var updatedList = [...this.state.initialTournaments];
+            updatedList = updatedList.filter(function(item){
+            return item.series.name.toLowerCase().search(
+                event.target.value.toLowerCase()) !== -1;
+            });
+            this.setState({tournaments: updatedList});
+        } 
+        // else{
+        //     this.setState({tournaments: this.state.initialTournaments});
+
+        // }
+        
+        
     }
 
     render() {
@@ -67,7 +101,7 @@ class Tournaments extends Component {
                     key={tournament.id}
                     tournament={tournament}
                     clicked={() => this.tournamentClickHandler(tournament.id)}
-                    />
+                />
             )
             tournamentTable =  <table className={classes.TournamentTable}>
                 <thead>
@@ -87,21 +121,14 @@ class Tournaments extends Component {
             </table>
             
         }
-        let tournamentSummary = null;
-        if(this.state.currentTournamentId){
-            console.log(this.state.tournaments[this.state.currentTournamentId])
-            tournamentSummary = <div>
-                {this.state.tournaments[this.state.currentTournamentId]}
-            </div>
-        }
         return (
             <div>
 
-                <Modal show={this.state.showTournamentDetail} modalClosed={this.hideModalHandler}>
-                    {tournamentSummary}
+                <Modal show={this.state.showTournamentDetails} modalClosed={this.hideModalHandler}>
+                    <TournamentDetails tournamentDetails={this.state.currentTournament} tournamentHeaders={TOURNAMENTS_HEADERS} />
                 </Modal>
                 <h1>Tournaments</h1>
-
+                <input type="text" placeholder="Search Series" onChange={this.searchSeriesHandler}/>
                 {tournamentTable}
             </div>
         )
