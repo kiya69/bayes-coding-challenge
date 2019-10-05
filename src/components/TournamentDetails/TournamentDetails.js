@@ -22,7 +22,6 @@ const TournamentDetails = (props) => {
                 );
             });
         // Or another simpler way is to hard code everything since it's not a very complex data structure
-
     }
     return (
 

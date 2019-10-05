@@ -1,5 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Describe your choices and decisions in a few words
+I decided to use Raact as it is the most familiar library for me. I like it because of its flexibility with component manipulation and the simplicity of file structure.
+
+#### A few main points in my decisions throughout coding this project:
+- Firstly, I drew out the wireframe of how I want the project look like and split each element into designated component.
+- I decided to split the start date and end date into a simpler format in TournamentItem.js by  taking only the date in jsx for ease of reading. I didn't change the value of it in the state because I think it might be something important at some point. Moreover, by keeping its original format, users can still see the exact date and time when they see the tournament details.
+-  I didn't implement the feature for filtering out by dates because it's a little ambiguous for me as I am not sure if the requirement is to filter a range of the dates or just tournament starts after certain date or before the end date.
+- I use a constant "TOURNAMENT_HEADERS" so that if we need to change any name of each item, we can just change it there once, and I sure did change some of them a few times.
+
+## Quickstart
+`npm install`
+`npm start`
+
+
 ## Available Scripts
 
 In the project directory, you can run:
