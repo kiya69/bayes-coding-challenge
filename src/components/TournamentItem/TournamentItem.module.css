@@ -5,3 +5,13 @@
 .TournamentItem:active {
     background-color: pink;
 }
+td {
+    padding: 0.25rem 1rem;
+}
+thead tr {
+    background-color: #000;
+    color: #FFF;
+}
+tbody tr:nth-child(odd) {
+    background-color: lightgrey;
+}

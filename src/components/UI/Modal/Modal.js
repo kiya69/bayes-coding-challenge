@@ -12,8 +12,7 @@ const modal = (props) => {
             style={{
                 transform: props.show ? 'translateY(-50%)' : 'translateY(-100vh)',
                 opacity: props.show ? '1' : '0'
-            }}
-        >
+            }}>
             {props.children}
         </div>
     </Aux>
