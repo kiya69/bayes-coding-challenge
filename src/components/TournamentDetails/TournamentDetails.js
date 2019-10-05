@@ -10,7 +10,7 @@ const TournamentDetails = (props) => {
                 if(typeof props.tournamentDetails[key] === 'object'){
                     const seriesObj = props.tournamentDetails[key];
                     return [
-                        <h3>Series:</h3>,
+                        <h3 key="series_title">Series:</h3>,
                         Object.keys(seriesObj).map(seriesObjKey =>( 
                             <p key={seriesObjKey}><span className={classes.bold}>{props.tournamentHeaders[key][seriesObjKey]}: </span>
                                 {seriesObj[seriesObjKey]}

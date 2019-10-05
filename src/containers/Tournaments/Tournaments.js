@@ -101,7 +101,9 @@ class Tournaments extends Component {
         return (
             <div>
                 <Modal show={this.state.showTournamentDetails} modalClosed={this.hideModalHandler}>
-                    <TournamentDetails tournamentDetails={this.state.currentTournamentDetails} tournamentHeaders={TOURNAMENT_HEADERS} />
+                    { this.state.showTournamentDetails 
+                        ? <TournamentDetails tournamentDetails={this.state.currentTournamentDetails} tournamentHeaders={TOURNAMENT_HEADERS} />
+                        : null }
                 </Modal>
                 <h1>Tournaments</h1>
                 <input type="text" placeholder="Search Series" onChange={this.searchSeriesHandler}/>
