@@ -7,7 +7,7 @@ import TournamentDetails from '../../components/TournamentDetails/TournamentDeta
 
 const TOURNAMENT_HEADERS = {
     id: 'ID',
-    name: 'NAME',
+    name: 'TOURNAMENT NAME',
     country: 'COUNTRY',
     city: 'CITY',
     date_start: 'START DATE',
@@ -60,12 +60,14 @@ class Tournaments extends Component {
     }
 
     searchSeriesHandler = (event) => {
-        var updatedList = [...this.state.originalTournaments];
-        updatedList = updatedList.filter(item => 
+        var updatedTournaments = [...this.state.originalTournaments];
+        
+        updatedTournaments = updatedTournaments.filter(item => 
             item.series.name.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1
         );
-        this.setState({tournaments: updatedList});
+
+        this.setState({tournaments: updatedTournaments});
     }
 
     render() {
@@ -95,7 +97,6 @@ class Tournaments extends Component {
                     {tournaments}
                 </tbody>                    
             </table>
-            
         }
         return (
             <div>
